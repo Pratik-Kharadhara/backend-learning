@@ -44,7 +44,20 @@ app.get('/notes',(req,res)=>{
             notes: notes 
         })
 })
+//now patch method 
+app.patch('/notes/:index',(req,res)=>{
+    const index = req.params.index;
+    const description = req.body.description;
+  //  const title = req.body.title;
 
+    notes[index].description = description;
+    notes[index].title = title;
+
+    res.status(200).json({
+        message : "note updated succesfully"
+    })
+
+})
 //export it to the server.js
 module.exports= app;
 
