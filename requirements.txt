@@ -1,0 +1,1 @@
+mongodb+srv://user-0:TN1dipfWHr4WG2kk@cluster0.nct8mh1.mongodb.net/firstDB
