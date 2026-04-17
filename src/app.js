@@ -86,6 +86,50 @@ app.post('/notesDB',async (req , res)=>{ // cause noteModel.create can take some
     })
 })
 
+//now to get notes  
+ app.get('/notesDB',async (req,res)=>{
+      const notes =   await  noteModel.find() //.find() method will always gives us the array of the all the notes stored in the db
+
+        /* this findOne help us to find a particular element using some condition here the title 
+            const notes =   await  noteModel.findOne({
+            title:"test title"
+         }) 
+        */
+
+        res.status(200).json({
+            message: "Notes retrived succesfully",
+            notes: notes
+        })
+    })
+// delete the notes
+app.delete('/notesDB/:id',async(req,res)=>{
+    const id = req.params.id
+    await noteModel.findOneAndDelete({ //as the name suggest its finds and Deletes
+        _id: id
+    })
+
+    res.status(200).json({
+        message:"notes deleted"
+    })
+})
+
+app.patch('/notesDB/:id',async (req,res)=>{
+    const id=  req.params.id;
+   const description =  req.body.description
+   await noteModel.findOneAndUpdate({ //it takes two object one to find on basis of what ? like id
+        //second one is to update what 
+
+        _id:id
+    },{
+            description: description
+    })
+
+    res.status(200).json({
+        message:"succesfully updated the msg"
+    })
+})
+
+
 
 
 //export it to the server.js
